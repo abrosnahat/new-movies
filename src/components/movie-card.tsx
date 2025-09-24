@@ -99,10 +99,6 @@ export function MovieCard({
                 <div className="p-4 w-full">
                   <div className="flex items-center gap-2 text-white/90 text-xs mb-2">
                     <div className="flex items-center gap-1">
-                      <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
-                      <span>{rating}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
                       <span>{year}</span>
                     </div>

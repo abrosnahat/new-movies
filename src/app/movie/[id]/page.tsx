@@ -2,14 +2,7 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  Star,
-  Calendar,
-  Clock,
-  ArrowLeft,
-  Play,
-  ExternalLink,
-} from "lucide-react";
+import { Star, Calendar, Clock, ArrowLeft, ExternalLink } from "lucide-react";
 import { tmdbClient } from "@/lib/tmdb";
 import {
   formatRating,
@@ -20,6 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MovieList } from "@/components/movie-list";
+import { TrailerButton } from "@/components/trailer-button";
 
 interface MoviePageProps {
   params: {
@@ -185,20 +179,20 @@ async function MovieContent({ id }: { id: string }) {
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     {trailer && (
-                      <Button size="lg" variant="primary" className="group">
-                        <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                        Watch Trailer
-                      </Button>
+                      <TrailerButton
+                        trailerKey={trailer.key}
+                        movieTitle={movieDetails.title}
+                      />
                     )}
                     {movieDetails.homepage && (
                       <a
-                        href={movieDetails.homepage}
+                        href={"https://t.me/new_movies_website"}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         <Button size="lg" variant="secondary">
                           <ExternalLink className="h-5 w-5 mr-2" />
-                          Official Site
+                          Telegram Channel
                         </Button>
                       </a>
                     )}

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Play, Info, Star, Calendar } from "lucide-react";
+import { Play, Star, Calendar } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Movie } from "@/types/tmdb";
 import { tmdbClient } from "@/lib/tmdb";
@@ -119,14 +119,10 @@ export function HeroSection({ movies }: HeroSectionProps) {
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Button size="lg" variant="primary" className="group">
-                      <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                      Watch Trailer
-                    </Button>
                     <Link href={`/movie/${currentMovie.id}`}>
-                      <Button size="lg" variant="secondary">
-                        <Info className="h-5 w-5 mr-2" />
-                        More Info
+                      <Button size="lg" variant="primary">
+                        <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+                        Watch
                       </Button>
                     </Link>
                   </div>

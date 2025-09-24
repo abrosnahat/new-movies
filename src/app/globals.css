@@ -20,7 +20,7 @@
   --error: #ff453a;
 
   /* Card Effects */
-  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-background: rgba(0, 0, 0, 0.1);
   --glass-border: rgba(255, 255, 255, 0.2);
   --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 
@@ -221,4 +221,23 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Modal Overlay - Highest Z-Index */
+.modal-overlay {
+  z-index: 999999 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+.modal-content {
+  z-index: 1000000 !important;
+  position: relative !important;
+  isolation: isolate;
+  transform: translateZ(0);
 }

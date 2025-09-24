@@ -1,8 +1,6 @@
-# 🎬 CineScope - Apple-Style Movie Discovery Platform
+# 🎬 NewMovies - Apple-Style Movie Discovery Platform
 
 A stunning, production-ready movie discovery platform built with Next.js 15, featuring Apple's signature glassmorphism design language and powered by The Movie Database (TMDB) API.
-
-![NewMovies Preview](https://via.placeholder.com/1200x600/000000/ffffff?text=NewMovies+-+Movie+Discovery+Platform)
 
 ## ✨ Features
 
