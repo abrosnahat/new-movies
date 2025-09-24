@@ -1,0 +1,13 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1280" height="720" fill="url(#backdrop-gradient)"/>
+<rect x="565" y="310" width="150" height="100" rx="12" fill="white" fill-opacity="0.1"/>
+<path d="M615 340L635 360L665 330" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0.6"/>
+<circle cx="625" cy="350" r="10" fill="white" fill-opacity="0.4"/>
+<text x="640" y="385" text-anchor="middle" fill="white" fill-opacity="0.6" font-family="Inter, sans-serif" font-size="16">No Backdrop</text>
+<defs>
+<linearGradient id="backdrop-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+<stop offset="100%" style="stop-color:#000000;stop-opacity:1" />
+</linearGradient>
+</defs>
+</svg>
