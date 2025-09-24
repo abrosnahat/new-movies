@@ -119,3 +119,99 @@ export interface SearchResponse {
   total_pages: number;
   total_results: number;
 }
+
+export interface MovieImages {
+  id: number;
+  backdrops: ImageData[];
+  logos: ImageData[];
+  posters: ImageData[];
+}
+
+export interface ImageData {
+  aspect_ratio: number;
+  height: number;
+  iso_639_1: string | null;
+  file_path: string;
+  vote_average: number;
+  vote_count: number;
+  width: number;
+}
+
+export interface ReviewsResponse {
+  id: number;
+  page: number;
+  results: Review[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface Review {
+  id: string;
+  author: string;
+  author_details: {
+    name: string;
+    username: string;
+    avatar_path: string | null;
+    rating: number | null;
+  };
+  content: string;
+  created_at: string;
+  updated_at: string;
+  url: string;
+}
+
+export interface KeywordsResponse {
+  id: number;
+  keywords: Keyword[];
+}
+
+export interface Keyword {
+  id: number;
+  name: string;
+}
+
+export interface ExternalIds {
+  id: number;
+  imdb_id: string | null;
+  facebook_id: string | null;
+  instagram_id: string | null;
+  twitter_id: string | null;
+  wikidata_id: string | null;
+}
+
+export interface ReleaseDatesResponse {
+  id: number;
+  results: ReleaseDate[];
+}
+
+export interface ReleaseDate {
+  iso_3166_1: string;
+  release_dates: ReleaseDateInfo[];
+}
+
+export interface ReleaseDateInfo {
+  certification: string;
+  iso_639_1: string;
+  note: string;
+  release_date: string;
+  type: number;
+}
+
+export interface WatchProvidersResponse {
+  id: number;
+  results: Record<string, WatchProviderData>;
+}
+
+export interface WatchProviderData {
+  link: string;
+  flatrate?: WatchProvider[];
+  rent?: WatchProvider[];
+  buy?: WatchProvider[];
+}
+
+export interface WatchProvider {
+  logo_path: string;
+  provider_id: number;
+  provider_name: string;
+  display_priority: number;
+}

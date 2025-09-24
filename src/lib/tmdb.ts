@@ -5,6 +5,12 @@ import {
   VideosResponse,
   SearchResponse,
   Genre,
+  MovieImages,
+  ReviewsResponse,
+  KeywordsResponse,
+  ExternalIds,
+  ReleaseDatesResponse,
+  WatchProvidersResponse,
 } from "@/types/tmdb";
 
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
@@ -98,6 +104,48 @@ class TMDBClient {
     return this.fetchFromTMDB<VideosResponse>(`/movie/${movieId}/videos`, {
       language: "en-US",
     });
+  }
+
+  // Movie images
+  async getMovieImages(movieId: number): Promise<MovieImages> {
+    return this.fetchFromTMDB<MovieImages>(`/movie/${movieId}/images`);
+  }
+
+  // Movie reviews
+  async getMovieReviews(
+    movieId: number,
+    page: number = 1
+  ): Promise<ReviewsResponse> {
+    return this.fetchFromTMDB<ReviewsResponse>(`/movie/${movieId}/reviews`, {
+      page: page.toString(),
+      language: "en-US",
+    });
+  }
+
+  // Movie keywords
+  async getMovieKeywords(movieId: number): Promise<KeywordsResponse> {
+    return this.fetchFromTMDB<KeywordsResponse>(`/movie/${movieId}/keywords`);
+  }
+
+  // Movie external IDs
+  async getMovieExternalIds(movieId: number): Promise<ExternalIds> {
+    return this.fetchFromTMDB<ExternalIds>(`/movie/${movieId}/external_ids`);
+  }
+
+  // Movie release dates
+  async getMovieReleaseDates(movieId: number): Promise<ReleaseDatesResponse> {
+    return this.fetchFromTMDB<ReleaseDatesResponse>(
+      `/movie/${movieId}/release_dates`
+    );
+  }
+
+  // Movie watch providers
+  async getMovieWatchProviders(
+    movieId: number
+  ): Promise<WatchProvidersResponse> {
+    return this.fetchFromTMDB<WatchProvidersResponse>(
+      `/movie/${movieId}/watch/providers`
+    );
   }
 
   // Similar movies
