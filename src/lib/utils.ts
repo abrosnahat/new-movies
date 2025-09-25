@@ -88,21 +88,11 @@ export function debounce<T extends (...args: any[]) => any>(
   };
 }
 
-export const getMovieDownloadUrl = (title: string): string | null => {
-  const id = MOVIES__DATA[title];
-
-  if (id) {
-    return `https://luluvdoo.com/d/${id}`;
-  }
-
-  return null;
-};
-
 export const getMovieWatchUrl = (title: string): string | null => {
   const id = MOVIES__DATA[title];
 
   if (id) {
-    return `https://luluvd.com/e/${id}`;
+    return `https://luluvid.com/e/${id}`;
   }
 
   return null;

@@ -25,6 +25,7 @@ import {
   formatCurrency,
   getCountryFlag,
   getLanguageFlag,
+  getMovieWatchUrl,
 } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -119,6 +120,9 @@ async function MovieContent({ id }: { id: string }) {
       videos.results.find(
         (video) => video.type === "Trailer" && video.site === "YouTube"
       ) || videos.results.find((video) => video.site === "YouTube");
+
+    // Get movie watch URL
+    const watchUrl = getMovieWatchUrl(movieDetails.title);
 
     // Get director and main cast
     const director = credits.crew.find((person) => person.job === "Director");
@@ -263,6 +267,57 @@ async function MovieContent({ id }: { id: string }) {
             </div>
           </div>
         </section>
+
+        {/* Watch Movie Section */}
+        {watchUrl && (
+          <section className="py-16 bg-gradient-to-b from-black/80 to-black/50">
+            <div className="container mx-auto px-6 lg:px-8">
+              {/* Back Button */}
+              <div className="mb-8">
+                <Link href="/">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="glass rounded-full text-white/80 hover:text-white"
+                  >
+                    <ArrowLeft className="h-4 w-4 mr-2" />
+                    Back to Movies
+                  </Button>
+                </Link>
+              </div>
+
+              <div className="text-center mb-8">
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 flex items-center justify-center">
+                  <Play className="h-8 w-8 mr-3 text-red-500" />
+                  Watch Movie
+                </h2>
+                <p className="text-white/80 text-lg">
+                  Stream {movieDetails.title} online
+                </p>
+              </div>
+
+              <div className="max-w-6xl mx-auto">
+                <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl">
+                  <iframe
+                    src={watchUrl}
+                    title={`Watch ${movieDetails.title}`}
+                    className="absolute inset-0 w-full h-full"
+                    allowFullScreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    style={{ border: "none" }}
+                  />
+                </div>
+
+                <div className="mt-6 text-center">
+                  <p className="text-white/60 text-sm">
+                    If the video doesn&apos;t load, try refreshing the page or
+                    check your internet connection.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Movie Details Section */}
         <section className="py-16 bg-black/50">
