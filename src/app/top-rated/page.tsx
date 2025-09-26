@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { tmdbClient } from "@/lib/tmdb";
-import { MovieGrid } from "@/components/movie-grid";
+import { TopRatedMoviesGrid } from "@/components/top-rated-movies-grid";
 
 export const metadata: Metadata = {
   title: "Top Rated Movies - Watch Best Films Online Free | NewMovies",
@@ -50,20 +50,11 @@ async function TopRatedContent() {
     const topRatedMovies = await tmdbClient.getTopRatedMovies();
 
     return (
-      <div className="min-h-screen pt-24">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              <span className="text-gradient">Top Rated Movies</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              The highest rated movies according to critics and audiences
-            </p>
-          </div>
-
-          <MovieGrid movies={topRatedMovies.results} showOverview={false} />
-        </div>
-      </div>
+      <TopRatedMoviesGrid
+        initialMovies={topRatedMovies.results}
+        initialPage={topRatedMovies.page}
+        totalPages={topRatedMovies.total_pages}
+      />
     );
   } catch (error) {
     console.error("Error fetching top rated movies:", error);

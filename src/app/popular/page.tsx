@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { tmdbClient } from "@/lib/tmdb";
-import { MovieGrid } from "@/components/movie-grid";
+import { PopularMoviesGrid } from "@/components/popular-movies-grid";
 
 export const metadata: Metadata = {
   title: "Popular Movies - Watch Online Free in HD | NewMovies",
@@ -50,21 +50,11 @@ async function PopularContent() {
     const popularMovies = await tmdbClient.getPopularMovies();
 
     return (
-      <div className="min-h-screen pt-24">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              <span className="text-gradient">Popular Movies</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Discover the most popular movies that everyone&apos;s talking
-              about
-            </p>
-          </div>
-
-          <MovieGrid movies={popularMovies.results} showOverview={false} />
-        </div>
-      </div>
+      <PopularMoviesGrid
+        initialMovies={popularMovies.results}
+        initialPage={popularMovies.page}
+        totalPages={popularMovies.total_pages}
+      />
     );
   } catch (error) {
     console.error("Error fetching popular movies:", error);

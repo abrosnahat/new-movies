@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { tmdbClient } from "@/lib/tmdb";
-import { MovieGrid } from "@/components/movie-grid";
+import { UpcomingMoviesGrid } from "@/components/upcoming-movies-grid";
 
 export const metadata: Metadata = {
   title: "Upcoming Movies - Watch Latest Releases Online | NewMovies",
@@ -50,20 +50,11 @@ async function UpcomingContent() {
     const upcomingMovies = await tmdbClient.getUpcomingMovies();
 
     return (
-      <div className="min-h-screen pt-24">
-        <div className="container mx-auto px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              <span className="text-gradient">Upcoming Movies</span>
-            </h1>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Get ready for the most anticipated movies coming to theaters
-            </p>
-          </div>
-
-          <MovieGrid movies={upcomingMovies.results} showOverview={false} />
-        </div>
-      </div>
+      <UpcomingMoviesGrid
+        initialMovies={upcomingMovies.results}
+        initialPage={upcomingMovies.page}
+        totalPages={upcomingMovies.total_pages}
+      />
     );
   } catch (error) {
     console.error("Error fetching upcoming movies:", error);

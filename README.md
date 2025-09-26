@@ -16,6 +16,7 @@ A stunning, production-ready movie discovery platform built with Next.js 15, fea
 
 - **Hero Carousel**: Featured trending movies with auto-rotation
 - **Category Browsing**: Popular, Top Rated, Upcoming, and Trending sections
+- **Infinite Scroll**: Seamless content loading on Popular, Top Rated, and Upcoming pages
 - **Movie Details**: Comprehensive information with cast, crew, and production details
 - **Search Functionality**: Real-time search with debounced queries
 - **Related Content**: Similar movies and personalized recommendations
@@ -29,6 +30,14 @@ A stunning, production-ready movie discovery platform built with Next.js 15, fea
 - **SEO Optimized**: Meta tags, Open Graph, and structured data
 - **TypeScript**: Full type safety throughout the application
 - **Responsive Caching**: Smart data caching with revalidation strategies
+
+### 🔄 Infinite Scroll
+
+- **Progressive Loading**: Auto-loads more content as you scroll
+- **Progress Indicator**: Real-time progress bar showing loading status
+- **Smart Caching**: Deduplication and efficient state management
+- **Error Recovery**: Retry mechanism with user-friendly error messages
+- **Back to Top**: Smooth scroll-to-top functionality
 
 ## 🚀 Quick Start
 

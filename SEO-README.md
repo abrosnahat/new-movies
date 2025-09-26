@@ -55,6 +55,8 @@
 
 ## 🎯 Target Keywords
 
+## 🎯 Target Keywords
+
 ### Primary Keywords:
 
 - "watch movies online free"
@@ -69,6 +71,117 @@
 - "[movie title] streaming HD"
 - "free [genre] movies online"
 - "[year] movies online free"
+
+## 📋 TMDB API Pagination Support for Infinite Scroll
+
+### ✅ **Полная поддержка пагинации для всех категорий:**
+
+#### **Popular Movies** (`/movie/popular`)
+
+- ✅ **Поддерживает параметр `page`** (от 1 до 1000)
+- ✅ **Возвращает `total_pages` и `total_results`** в ответе
+- ✅ **20 фильмов на страницу** (стандартный размер)
+- 🔗 **Эквивалентный Discover запрос:** `sort_by=popularity.desc`
+
+#### **Top Rated Movies** (`/movie/top_rated`)
+
+- ✅ **Поддерживает параметр `page`** (от 1 до 1000)
+- ✅ **Возвращает `total_pages` и `total_results`** в ответе
+- ✅ **20 фильмов на страницу** (стандартный размер)
+- 🔗 **Эквивалентный Discover запрос:** `sort_by=vote_average.desc&vote_count.gte=200`
+
+#### **Upcoming Movies** (`/movie/upcoming`)
+
+- ✅ **Поддерживает параметр `page`** (от 1 до 1000)
+- ✅ **Возвращает `total_pages` и `total_results`** в ответе
+- ✅ **20 фильмов на страницу** (стандартный размер)
+- 🔗 **Эквивалентный Discover запрос:** `sort_by=popularity.desc&with_release_type=2|3`
+
+### 📊 **Структура ответа MoviesResponse:**
+
+```typescript
+interface MoviesResponse {
+  page: number; // Текущая страница
+  results: Movie[]; // Массив фильмов (20 элементов)
+  total_pages: number; // Общее количество страниц
+  total_results: number; // Общее количество фильмов
+}
+```
+
+### 🔄 **Реализация бесконечного скролла:**
+
+1. **API методы уже поддерживают пагинацию:**
+
+   ```typescript
+   getPopularMovies(page: number = 1): Promise<MoviesResponse>
+   getTopRatedMovies(page: number = 1): Promise<MoviesResponse>
+   getUpcomingMovies(page: number = 1): Promise<MoviesResponse>
+   ```
+
+2. **Для бесконечного скролла нужно:**
+
+   - Отслеживать текущую страницу (`currentPage`)
+   - Проверять есть ли еще страницы (`currentPage < total_pages`)
+   - Загружать следующую страницу при скролле до конца
+   - Объединять результаты в один массив
+
+3. **Ограничения TMDB API:**
+   - 📋 **Максимум 1000 страниц** на каждый endpoint
+   - 📋 **20 результатов на страницу** (фиксированно)
+   - 📋 **Rate limiting:** ~40 запросов на 10 секунд
+
+### 🛠️ **Рекомендуемая реализация:**
+
+Для каждой страницы (`popular`, `top-rated`, `upcoming`) можно добавить:
+
+1. **State для управления пагинацией:**
+
+   ```typescript
+   const [movies, setMovies] = useState<Movie[]>([]);
+   const [currentPage, setCurrentPage] = useState(1);
+   const [totalPages, setTotalPages] = useState(0);
+   const [loading, setLoading] = useState(false);
+   ```
+
+2. **Функция загрузки следующей страницы:**
+
+   ```typescript
+   const loadNextPage = async () => {
+     if (currentPage >= totalPages || loading) return;
+
+     setLoading(true);
+     const response = await tmdbClient.getPopularMovies(currentPage + 1);
+     setMovies((prev) => [...prev, ...response.results]);
+     setCurrentPage(response.page);
+     setTotalPages(response.total_pages);
+     setLoading(false);
+   };
+   ```
+
+3. **Intersection Observer для автозагрузки:**
+   ```typescript
+   useEffect(() => {
+     const observer = new IntersectionObserver(
+       (entries) => {
+         if (entries[0].isIntersecting) loadNextPage();
+       },
+       { threshold: 1.0 }
+     );
+
+     if (loadTriggerRef.current) {
+       observer.observe(loadTriggerRef.current);
+     }
+
+     return () => observer.disconnect();
+   }, [currentPage, totalPages]);
+   ```
+
+### 🎯 **SEO преимущества бесконечного скролла:**
+
+- ✅ **Увеличение времени на сайте** - пользователи дольше просматривают контент
+- ✅ **Снижение bounce rate** - меньше переходов между страницами
+- ✅ **Больше просмотров фильмов** - увеличение CTR на фильмы
+- ✅ **Лучший пользовательский опыт** - плавная навигация без перезагрузок
 
 ## 📊 SEO Performance Features
 
