@@ -31,6 +31,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MovieList } from "@/components/movie-list";
 import { TrailerButton } from "@/components/trailer-button";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 interface MoviePageProps {
   params: {
@@ -144,6 +145,7 @@ async function MovieContent({ id }: { id: string }) {
 
     return (
       <div className="min-h-screen">
+        <ScrollToTop />
         {/* Hero Section */}
         <section className="relative h-screen overflow-hidden">
           <div className="absolute inset-0">
