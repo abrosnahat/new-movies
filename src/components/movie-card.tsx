@@ -26,27 +26,6 @@ export function MovieCard({
   const year = movie.release_date ? formatYear(movie.release_date) : "TBD";
   const rating = formatRating(movie.vote_average);
 
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        delay: index * 0.1,
-        ease: "easeOut" as const,
-      },
-    },
-  };
-
-  const imageVariants = {
-    rest: { scale: 1 },
-    hover: {
-      scale: 1.05,
-      transition: { duration: 0.3, ease: "easeOut" as const },
-    },
-  };
-
   const overlayVariants = {
     rest: { opacity: 0 },
     hover: { opacity: 1, transition: { duration: 0.3 } },
@@ -65,21 +44,12 @@ export function MovieCard({
   };
 
   return (
-    <motion.div
-      variants={cardVariants}
-      initial="hidden"
-      animate="visible"
-      whileHover="hover"
-      className="group"
-    >
+    <div className="group">
       <Link href={`/movie/${movie.id}`}>
         <Card
           className={`${sizeClasses[size]} overflow-hidden p-0 flex flex-col hover:scale-105 transition-transform duration-300 bg-white/10 border border-white/20`}
         >
-          <motion.div
-            className="relative flex flex-col h-full w-full"
-            variants={imageVariants}
-          >
+          <div className="relative flex flex-col h-full w-full">
             {/* Movie Poster */}
             <div className="relative flex-shrink-0 aspect-[2/3] w-full overflow-hidden rounded-t-xl">
               <Image
@@ -151,9 +121,9 @@ export function MovieCard({
                 )}
               </div>
             </div>
-          </motion.div>
+          </div>
         </Card>
       </Link>
-    </motion.div>
+    </div>
   );
 }
