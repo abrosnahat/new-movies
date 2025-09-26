@@ -114,9 +114,35 @@ export function UpcomingMoviesGrid({
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             <span className="text-gradient">Upcoming Movies</span>
           </h1>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-4">
+          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-6">
             Get ready for the most anticipated movies coming to theaters
           </p>
+
+          {/* SEO Content */}
+          <div className="max-w-4xl mx-auto mb-8 space-y-4">
+            <div className="glass rounded-xl p-6 text-left">
+              <h2 className="text-lg font-semibold text-white mb-3">
+                Watch Upcoming Movies Online - Latest Releases & New Films
+              </h2>
+              <p className="text-white/80 text-sm leading-relaxed mb-3">
+                Stay ahead of the curve with upcoming movies and latest releases
+                streaming online free. Discover the most anticipated films,
+                blockbuster sequels, and promising new releases before they hit
+                mainstream theaters. From highly-awaited superhero adventures to
+                indie darlings generating festival buzz, explore the future of
+                cinema today.
+              </p>
+              <p className="text-white/80 text-sm leading-relaxed">
+                Our upcoming movies collection features early releases,
+                international premieres, and exclusive previews of the next big
+                hits. Be the first to watch new movies online, follow trending
+                release schedules, and discover hidden gems from emerging
+                filmmakers and established directors preparing their next
+                masterpiece.
+              </p>
+            </div>
+          </div>
+
           <div className="text-sm text-white/50">
             Showing {movies.length} of {totalPages * 20} movies
           </div>
@@ -185,6 +211,60 @@ export function UpcomingMoviesGrid({
             </div>
           </div>
         )}
+
+        {/* Bottom SEO Content */}
+        <div className="mt-16 mb-8">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="glass rounded-xl p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">
+                Stay Ahead with Upcoming Releases
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-white/80">
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    First to Watch
+                  </h4>
+                  <p className="leading-relaxed">
+                    Be among the first to watch upcoming movies before they
+                    become mainstream hits. Discover new releases, exclusive
+                    premieres, and anticipated sequels from your favorite
+                    directors and actors.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Future Blockbusters
+                  </h4>
+                  <p className="leading-relaxed">
+                    Preview the next generation of cinema with upcoming
+                    blockbusters, franchise continuations, and
+                    highly-anticipated adaptations that promise to dominate
+                    theaters and streaming platforms.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">Fresh Content</h4>
+                  <p className="leading-relaxed">
+                    Our upcoming movies collection features the latest releases
+                    from emerging filmmakers and established studios, ensuring
+                    you always have access to fresh, innovative cinema content.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Release Calendar
+                  </h4>
+                  <p className="leading-relaxed">
+                    Follow the most comprehensive upcoming movie release
+                    schedule, featuring precise release dates, trailers, and
+                    insider information about the most anticipated films coming
+                    to screens worldwide.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <BackToTop />

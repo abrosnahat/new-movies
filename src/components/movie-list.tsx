@@ -6,12 +6,14 @@ import { motion } from "framer-motion";
 import { Movie } from "@/types/tmdb";
 import { MovieCard } from "@/components/movie-card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface MovieListProps {
   title: string;
   movies: Movie[];
   showOverview?: boolean;
   size?: "sm" | "md" | "lg";
+  href?: string;
 }
 
 export function MovieList({
@@ -19,6 +21,7 @@ export function MovieList({
   movies,
   showOverview = false,
   size = "lg",
+  href,
 }: MovieListProps) {
   const [scrollPosition, setScrollPosition] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -79,7 +82,22 @@ export function MovieList({
       {/* Section Header */}
       <div className="container mx-auto px-6 lg:px-8 mb-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl md:text-3xl font-bold text-white">{title}</h2>
+          <div className="flex items-center gap-4">
+            {href ? (
+              <Link href={href} className="group cursor-pointer">
+                <h2 className="text-2xl md:text-3xl font-bold text-white group-hover:text-blue-400 transition-colors duration-200">
+                  {title}
+                  <span className="ml-2 text-blue-400 opacity-0 group-hover:opacity-100 transition-all duration-200 transform group-hover:translate-x-1">
+                    →
+                  </span>
+                </h2>
+              </Link>
+            ) : (
+              <h2 className="text-2xl md:text-3xl font-bold text-white">
+                {title}
+              </h2>
+            )}
+          </div>
 
           {/* Navigation Buttons */}
           <div className="hidden md:flex items-center gap-2">

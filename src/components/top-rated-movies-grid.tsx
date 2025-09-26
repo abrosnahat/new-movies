@@ -114,9 +114,35 @@ export function TopRatedMoviesGrid({
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             <span className="text-gradient">Top Rated Movies</span>
           </h1>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-4">
+          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-6">
             The highest rated movies according to critics and audiences
           </p>
+
+          {/* SEO Content */}
+          <div className="max-w-4xl mx-auto mb-8 space-y-4">
+            <div className="glass rounded-xl p-6 text-left">
+              <h2 className="text-lg font-semibold text-white mb-3">
+                Watch Top Rated Movies Online Free - Best Films Ever Made
+              </h2>
+              <p className="text-white/80 text-sm leading-relaxed mb-3">
+                Stream the highest rated movies online free in HD quality. Our
+                curated collection features critically acclaimed masterpieces,
+                award-winning cinema, and films that have achieved legendary
+                status among critics and audiences worldwide. From timeless
+                classics to modern masterworks, discover the movies that define
+                excellence in filmmaking.
+              </p>
+              <p className="text-white/80 text-sm leading-relaxed">
+                These top-rated films represent the pinnacle of cinematic
+                achievement, featuring outstanding performances, exceptional
+                storytelling, and groundbreaking direction. Watch Oscar winners,
+                Cannes Film Festival champions, and critically acclaimed gems
+                that continue to inspire and captivate viewers across
+                generations.
+              </p>
+            </div>
+          </div>
+
           <div className="text-sm text-white/50">
             Showing {movies.length} of {totalPages * 20} movies
           </div>
@@ -185,6 +211,62 @@ export function TopRatedMoviesGrid({
             </div>
           </div>
         )}
+
+        {/* Bottom SEO Content */}
+        <div className="mt-16 mb-8">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="glass rounded-xl p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">
+                Discover Cinema&apos;s Greatest Achievements
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-white/80">
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Award-Winning Cinema
+                  </h4>
+                  <p className="leading-relaxed">
+                    Watch Oscar-winning movies, Palme d&apos;Or champions, and
+                    critically acclaimed films that have shaped cinema history.
+                    Experience the masterpieces that continue to influence
+                    filmmakers worldwide.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Critics&apos; Choice
+                  </h4>
+                  <p className="leading-relaxed">
+                    Stream movies with the highest ratings from professional
+                    critics and film scholars. These top-rated films represent
+                    the pinnacle of storytelling, cinematography, and artistic
+                    achievement.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Timeless Classics
+                  </h4>
+                  <p className="leading-relaxed">
+                    Explore legendary films that have stood the test of time,
+                    from golden age Hollywood classics to modern masterworks
+                    that continue to captivate new generations of movie lovers.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Quality Guaranteed
+                  </h4>
+                  <p className="leading-relaxed">
+                    Every top-rated movie in our collection has earned its place
+                    through exceptional quality, outstanding performances, and
+                    lasting cultural impact that resonates with audiences
+                    worldwide.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <BackToTop />

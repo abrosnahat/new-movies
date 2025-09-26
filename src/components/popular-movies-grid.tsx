@@ -114,9 +114,35 @@ export function PopularMoviesGrid({
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
             <span className="text-gradient">Popular Movies</span>
           </h1>
-          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-4">
+          <p className="text-xl text-white/70 max-w-2xl mx-auto mb-6">
             Discover the most popular movies that everyone&apos;s talking about
           </p>
+
+          {/* SEO Content */}
+          <div className="max-w-4xl mx-auto mb-8 space-y-4">
+            <div className="glass rounded-xl p-6 text-left">
+              <h2 className="text-lg font-semibold text-white mb-3">
+                Watch Popular Movies Online Free in HD
+              </h2>
+              <p className="text-white/80 text-sm leading-relaxed mb-3">
+                Stream the most popular movies online free in crystal-clear HD
+                quality. Our collection features trending blockbusters,
+                critically acclaimed films, and audience favorites that are
+                currently making waves in cinemas worldwide. From action-packed
+                superhero adventures to heartwarming romantic comedies, discover
+                why these movies are capturing global attention.
+              </p>
+              <p className="text-white/80 text-sm leading-relaxed">
+                Updated daily with the latest popular releases, our platform
+                offers instant streaming of Hollywood&apos;s biggest hits,
+                international cinema, and award-winning films. Experience the
+                movies everyone&apos;s talking about with no sign-up required -
+                just click and watch your favorite popular movies in high
+                definition.
+              </p>
+            </div>
+          </div>
+
           <div className="text-sm text-white/50">
             Showing {movies.length} of {totalPages * 20} movies
           </div>
@@ -185,6 +211,61 @@ export function PopularMoviesGrid({
             </div>
           </div>
         )}
+
+        {/* Bottom SEO Content */}
+        <div className="mt-16 mb-8">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <div className="glass rounded-xl p-6">
+              <h3 className="text-xl font-semibold text-white mb-4">
+                Why Watch Popular Movies Online?
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6 text-sm text-white/80">
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Trending Entertainment
+                  </h4>
+                  <p className="leading-relaxed">
+                    Stay current with the most popular movies that are
+                    dominating box offices and streaming charts worldwide. From
+                    blockbuster franchises to viral indie hits, discover what
+                    everyone&apos;s watching.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    HD Quality Streaming
+                  </h4>
+                  <p className="leading-relaxed">
+                    Experience popular movies in crystal-clear high definition
+                    with optimized streaming technology. No buffering, no
+                    interruptions - just seamless movie watching from any
+                    device.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Always Updated
+                  </h4>
+                  <p className="leading-relaxed">
+                    Our popular movies collection updates daily with the latest
+                    trending films, ensuring you never miss the next big hit or
+                    cultural phenomenon taking the world by storm.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="font-medium text-white mb-2">
+                    Free & Instant
+                  </h4>
+                  <p className="leading-relaxed">
+                    Watch popular movies online free with no sign-up required.
+                    Click, stream, and enjoy the most talked-about films without
+                    any subscription fees or hidden costs.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <BackToTop />

@@ -114,6 +114,7 @@ async function HomeContent() {
               title="Popular Movies"
               movies={popularMovies.results}
               size="lg"
+              href="/popular"
             />
           </Suspense>
 
@@ -122,6 +123,7 @@ async function HomeContent() {
               title="Top Rated"
               movies={topRatedMovies.results}
               size="lg"
+              href="/top-rated"
             />
           </Suspense>
 
@@ -130,6 +132,7 @@ async function HomeContent() {
               title="Coming Soon"
               movies={upcomingMovies.results}
               size="lg"
+              href="/upcoming"
             />
           </Suspense>
         </div>
