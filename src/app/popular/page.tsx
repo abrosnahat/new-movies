@@ -1,6 +1,24 @@
 import { Suspense } from "react";
+import { Metadata } from "next";
 import { tmdbClient } from "@/lib/tmdb";
 import { MovieGrid } from "@/components/movie-grid";
+
+export const metadata: Metadata = {
+  title: "Popular Movies - Watch Online Free in HD | NewMovies",
+  description:
+    "Watch the most popular movies online free in HD quality. Stream trending blockbusters, action films, comedies and dramas. Updated daily with the latest popular movies.",
+  keywords:
+    "popular movies online, trending movies, watch popular films, blockbusters online, most watched movies, popular cinema",
+  openGraph: {
+    title: "Popular Movies - Watch Online Free in HD | NewMovies",
+    description:
+      "Watch the most popular movies online free in HD quality. Stream trending blockbusters, action films, comedies and dramas.",
+    url: "https://new-movies.online/popular",
+  },
+  alternates: {
+    canonical: "https://new-movies.online/popular",
+  },
+};
 
 function MovieGridSkeleton() {
   return (

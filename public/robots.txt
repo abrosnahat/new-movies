@@ -1,0 +1,32 @@
+User-Agent: *
+Disallow: *utm
+Disallow: *?
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/	
+Disallow: *?q=
+Disallow: *?sort=
+Disallow: *&page=
+
+
+User-agent: Yandex
+Disallow: *?
+Disallow: *utm
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Clean-param: q&sort&page
+
+
+User-agent: Googlebot
+Disallow: *?
+Disallow: *utm
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: *?q=
+Disallow: *?sort=
+Disallow: *&page=
+
+
+Sitemap: https://new-movies.online/sitemap.xml

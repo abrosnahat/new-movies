@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Metadata } from "next";
 import {
   Star,
   Calendar,
@@ -31,12 +32,97 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { MovieList } from "@/components/movie-list";
 import { TrailerButton } from "@/components/trailer-button";
-import { ScrollToTop } from "@/components/scroll-to-top";
+import { JsonLd } from "@/components/json-ld";
+import { generateMovieJsonLd } from "@/lib/seo";
+import { Breadcrumbs } from "@/components/breadcrumbs";
 
 interface MoviePageProps {
   params: {
     id: string;
   };
+}
+
+export async function generateMetadata({
+  params,
+}: MoviePageProps): Promise<Metadata> {
+  try {
+    const { id } = await params;
+    const movieId = parseInt(id);
+    const movieDetails = await tmdbClient.getMovieDetails(movieId);
+
+    const watchUrl = getMovieWatchUrl(movieDetails.title);
+    const posterUrl = tmdbClient.getImageUrl(movieDetails.poster_path, "w500");
+    const backdropUrl = tmdbClient.getBackdropUrl(
+      movieDetails.backdrop_path,
+      "w1280"
+    );
+    const year = movieDetails.release_date
+      ? formatYear(movieDetails.release_date)
+      : "";
+    const rating = formatRating(movieDetails.vote_average);
+    const genres = movieDetails.genres.map((g) => g.name).join(", ");
+
+    const title = `Watch ${movieDetails.title} (${year}) Online Free in HD | NewMovies`;
+    const description = `Watch ${
+      movieDetails.title
+    } (${year}) online free in HD quality. ${
+      movieDetails.overview ||
+      `Stream this ${genres.toLowerCase()} movie instantly.`
+    } Rating: ${rating}/10. ${
+      watchUrl ? "Available for streaming now." : "Coming soon."
+    }`;
+
+    return {
+      title,
+      description,
+      keywords: [
+        `watch ${movieDetails.title} online`,
+        `${movieDetails.title} streaming`,
+        `${movieDetails.title} free online`,
+        `${movieDetails.title} HD`,
+        genres,
+        `${year} movies`,
+        "free movie streaming",
+        "watch movies online",
+      ].join(", "),
+      openGraph: {
+        title,
+        description,
+        type: "video.movie",
+        url: `https://new-movies.online/movie/${movieId}`,
+        images: [
+          {
+            url: backdropUrl,
+            width: 1280,
+            height: 720,
+            alt: `${movieDetails.title} - Watch Online Free`,
+          },
+          {
+            url: posterUrl,
+            width: 500,
+            height: 750,
+            alt: `${movieDetails.title} Poster`,
+          },
+        ],
+        releaseDate: movieDetails.release_date,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title,
+        description,
+        images: [backdropUrl],
+      },
+      alternates: {
+        canonical: `https://new-movies.online/movie/${movieId}`,
+      },
+    };
+  } catch {
+    return {
+      title: "Movie Not Found | NewMovies",
+      description:
+        "The requested movie could not be found. Browse our collection of free movies online.",
+    };
+  }
 }
 
 function MovieDetailSkeleton() {
@@ -145,7 +231,7 @@ async function MovieContent({ id }: { id: string }) {
 
     return (
       <div className="min-h-screen">
-        <ScrollToTop />
+        <JsonLd data={generateMovieJsonLd(movieDetails)} />
         {/* Hero Section */}
         <section className="relative h-screen overflow-hidden">
           <div className="absolute inset-0">
@@ -174,6 +260,16 @@ async function MovieContent({ id }: { id: string }) {
                 <ArrowLeft className="h-5 w-5" />
               </Button>
             </Link>
+          </div>
+
+          {/* Breadcrumbs */}
+          <div className="absolute top-40 left-6 lg:left-8 z-20">
+            <Breadcrumbs
+              items={[
+                { label: "Movies", href: "/" },
+                { label: movieDetails.title },
+              ]}
+            />
           </div>
 
           {/* Content */}

@@ -1,7 +1,31 @@
 import { Suspense } from "react";
+import { Metadata } from "next";
 import { tmdbClient } from "@/lib/tmdb";
 import { HeroSection } from "@/components/hero-section";
 import { MovieList } from "@/components/movie-list";
+
+export const metadata: Metadata = {
+  title: "Watch Movies Online Free - Stream Latest Films in HD | NewMovies",
+  description:
+    "Watch the latest movies online free in HD quality. Stream blockbusters, action films, comedies, dramas and more. No sign-up required. Instant streaming of Hollywood movies and international cinema.",
+  keywords:
+    "watch movies online free, stream movies, latest movies 2024, HD movies online, free movie streaming, blockbusters online, hollywood movies, action movies online, comedy films, drama movies",
+  openGraph: {
+    title: "Watch Movies Online Free - Stream Latest Films in HD | NewMovies",
+    description:
+      "Watch the latest movies online free in HD quality. Stream blockbusters, action films, comedies, dramas and more. No sign-up required.",
+    type: "website",
+    url: "https://new-movies.online",
+  },
+  twitter: {
+    title: "Watch Movies Online Free - Stream Latest Films in HD | NewMovies",
+    description:
+      "Watch the latest movies online free in HD quality. Stream blockbusters, action films, comedies, dramas and more. No sign-up required.",
+  },
+  alternates: {
+    canonical: "https://new-movies.online",
+  },
+};
 
 // Loading component
 function MovieListSkeleton() {

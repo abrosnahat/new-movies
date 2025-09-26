@@ -1,6 +1,24 @@
 import { Suspense } from "react";
+import { Metadata } from "next";
 import { tmdbClient } from "@/lib/tmdb";
 import { MovieGrid } from "@/components/movie-grid";
+
+export const metadata: Metadata = {
+  title: "Upcoming Movies - Watch Latest Releases Online | NewMovies",
+  description:
+    "Watch upcoming and latest movie releases online free in HD. Stream new blockbusters, sequels and anticipated films. Stay updated with the newest movies coming soon.",
+  keywords:
+    "upcoming movies, new releases, latest movies 2024, new films online, movie releases, coming soon movies",
+  openGraph: {
+    title: "Upcoming Movies - Watch Latest Releases Online | NewMovies",
+    description:
+      "Watch upcoming and latest movie releases online free in HD. Stream new blockbusters, sequels and anticipated films.",
+    url: "https://new-movies.online/upcoming",
+  },
+  alternates: {
+    canonical: "https://new-movies.online/upcoming",
+  },
+};
 
 function MovieGridSkeleton() {
   return (

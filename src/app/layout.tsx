@@ -2,6 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import { JsonLd } from "@/components/json-ld";
+import {
+  websiteJsonLd,
+  organizationJsonLd,
+  movieStreamingServiceJsonLd,
+} from "@/lib/seo";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -11,34 +18,66 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "NewMovies - Discover Amazing Movies",
+  title: {
+    default: "NewMovies - Watch Movies Online Free | Stream Latest Films HD",
+    template: "%s | NewMovies - Watch Online Free",
+  },
   description:
-    "Explore the latest, trending, and top-rated movies with NewMovies. Your ultimate destination for movie discovery.",
+    "Watch movies online free in HD quality. Stream latest blockbusters, trending films, and top-rated movies. No registration required. Instant streaming of Hollywood movies, action films, comedy, drama and more.",
   keywords: [
-    "movies",
-    "cinema",
-    "films",
-    "entertainment",
-    "TMDB",
-    "movie database",
+    "watch movies online",
+    "free movies online",
+    "stream movies",
+    "watch films online",
+    "online cinema",
+    "free streaming",
+    "HD movies",
+    "latest movies",
+    "blockbusters online",
+    "hollywood movies",
+    "action movies",
+    "comedy films",
+    "drama movies",
+    "thriller movies",
+    "watch movies free",
+    "movie streaming",
+    "cinema online",
+    "films online",
+    "new movies 2024",
+    "popular movies",
   ],
   authors: [{ name: "NewMovies Team" }],
   creator: "NewMovies",
-  metadataBase: new URL("https://NewMovies.vercel.app"),
+  publisher: "NewMovies",
+  metadataBase: new URL("https://new-movies.online"),
+  alternates: {
+    canonical: "https://new-movies.online",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://NewMovies.vercel.app",
-    title: "NewMovies - Discover Amazing Movies",
+    url: "https://new-movies.online",
+    title: "NewMovies - Watch Movies Online Free | Stream Latest Films HD",
     description:
-      "Explore the latest, trending, and top-rated movies with NewMovies.",
+      "Watch movies online free in HD quality. Stream latest blockbusters, trending films, and top-rated movies. No registration required.",
     siteName: "NewMovies",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "NewMovies - Watch Movies Online Free",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NewMovies - Discover Amazing Movies",
+    site: "@newmovies",
+    creator: "@newmovies",
+    title: "NewMovies - Watch Movies Online Free | Stream Latest Films HD",
     description:
-      "Explore the latest, trending, and top-rated movies with NewMovies.",
+      "Watch movies online free in HD quality. Stream latest blockbusters, trending films, and top-rated movies. No registration required.",
+    images: ["/twitter-image.jpg"],
   },
   robots: {
     index: true,
@@ -60,9 +99,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <JsonLd data={websiteJsonLd} />
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={movieStreamingServiceJsonLd} />
+      </head>
       <body className={`${inter.className} font-sans`}>
         <Navigation />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   );

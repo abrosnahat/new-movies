@@ -1,6 +1,24 @@
 import { Suspense } from "react";
+import { Metadata } from "next";
 import { tmdbClient } from "@/lib/tmdb";
 import { MovieGrid } from "@/components/movie-grid";
+
+export const metadata: Metadata = {
+  title: "Top Rated Movies - Watch Best Films Online Free | NewMovies",
+  description:
+    "Watch the highest rated movies online free in HD quality. Stream critically acclaimed films, award winners and cinema classics. The best movies ever made available for free streaming.",
+  keywords:
+    "top rated movies, best movies online, highest rated films, award winning movies, classic cinema, critically acclaimed movies",
+  openGraph: {
+    title: "Top Rated Movies - Watch Best Films Online Free | NewMovies",
+    description:
+      "Watch the highest rated movies online free in HD quality. Stream critically acclaimed films, award winners and cinema classics.",
+    url: "https://new-movies.online/top-rated",
+  },
+  alternates: {
+    canonical: "https://new-movies.online/top-rated",
+  },
+};
 
 function MovieGridSkeleton() {
   return (
