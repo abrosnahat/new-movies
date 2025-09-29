@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Movie, MoviesResponse } from "@/types/tmdb";
 import { MovieGrid } from "./movie-grid";
-import { SearchInput } from "./ui/search-input";
 import { BackToTop } from "./back-to-top";
 
 const TMDB_API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
@@ -114,21 +113,6 @@ export function SearchResults() {
       setLoadingMore(false);
     }
   };
-
-  const handleSearchSubmit = useCallback((newQuery: string) => {
-    setQuery(newQuery);
-
-    // Update URL immediately on submit
-    if (window.location.pathname === "/search") {
-      const url = new URL(window.location.href);
-      if (newQuery.trim()) {
-        url.searchParams.set("q", newQuery);
-      } else {
-        url.searchParams.delete("q");
-      }
-      window.history.replaceState({}, "", url.toString());
-    }
-  }, []);
 
   return (
     <div className="min-h-screen pt-24">
