@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { Film, Star, TrendingUp, Calendar, Menu, X } from "lucide-react";
 import { SearchInput } from "@/components/ui/search-input";
@@ -28,13 +28,24 @@ interface NavigationProps {
 
 export function Navigation({ onSearch }: NavigationProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
   const pathname = usePathname();
+  const router = useRouter();
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    onSearch?.(query);
-  };
+  const handleSearch = useCallback(
+    (query: string) => {
+      onSearch?.(query);
+    },
+    [onSearch]
+  );
+
+  const handleSearchSubmit = useCallback(
+    (query: string) => {
+      if (query.trim()) {
+        router.push(`/search?q=${encodeURIComponent(query)}`);
+      }
+    },
+    [router]
+  );
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -84,8 +95,7 @@ export function Navigation({ onSearch }: NavigationProps) {
           <div className="hidden md:block w-full max-w-md mx-8">
             <SearchInput
               onSearch={handleSearch}
-              value={searchQuery}
-              onChange={setSearchQuery}
+              onSubmit={handleSearchSubmit}
               placeholder="Search movies..."
               className="w-full"
             />
@@ -110,8 +120,7 @@ export function Navigation({ onSearch }: NavigationProps) {
         <div className="md:hidden mt-4">
           <SearchInput
             onSearch={handleSearch}
-            value={searchQuery}
-            onChange={setSearchQuery}
+            onSubmit={handleSearchSubmit}
             placeholder="Search movies..."
           />
         </div>

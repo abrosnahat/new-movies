@@ -4,6 +4,7 @@ Disallow: *?
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/	
+Disallow: /search
 Disallow: *?q=
 Disallow: *?sort=
 Disallow: *&page=
@@ -15,6 +16,7 @@ Disallow: *utm
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
+Disallow: /search
 Clean-param: q&sort&page
 
 
@@ -24,6 +26,7 @@ Disallow: *utm
 Disallow: /admin/
 Disallow: /api/
 Disallow: /private/
+Disallow: /search
 Disallow: *?q=
 Disallow: *?sort=
 Disallow: *&page=

@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 import { debounce } from "@/lib/utils";
 
 interface SearchInputProps {
-  onSearch: (query: string) => void;
+  onSearch?: (query: string) => void;
+  onSubmit?: (query: string) => void;
   placeholder?: string;
   className?: string;
   value?: string;
@@ -15,6 +16,7 @@ interface SearchInputProps {
 
 export function SearchInput({
   onSearch,
+  onSubmit,
   placeholder = "Search movies...",
   className,
   value: controlledValue,
@@ -24,15 +26,19 @@ export function SearchInput({
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const value = controlledValue !== undefined ? controlledValue : internalValue;
+  // Если есть onChange, это контролируемый компонент
+  const isControlled = onChange !== undefined;
+  const value = isControlled ? controlledValue || "" : internalValue;
 
   const debouncedSearch = debounce((query: string) => {
-    onSearch(query);
+    onSearch?.(query);
   }, 300);
 
   useEffect(() => {
-    debouncedSearch(value);
-  }, [value, debouncedSearch]);
+    if (onSearch) {
+      debouncedSearch(value);
+    }
+  }, [value, debouncedSearch, onSearch]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -53,7 +59,9 @@ export function SearchInput({
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Escape") {
+    if (e.key === "Enter" && onSubmit) {
+      onSubmit(value);
+    } else if (e.key === "Escape") {
       handleClear();
       inputRef.current?.blur();
     }
