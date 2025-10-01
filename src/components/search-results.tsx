@@ -168,7 +168,7 @@ export function SearchResults() {
         {!loading && !error && movies.length > 0 && (
           <>
             <div className="transition-all duration-300">
-              <MovieGrid movies={movies} showOverview={false} />
+              <MovieGrid movies={movies} />
             </div>
 
             {/* Load More Button */}

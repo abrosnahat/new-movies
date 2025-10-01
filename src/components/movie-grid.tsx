@@ -6,14 +6,9 @@ import { MovieCard } from "@/components/movie-card";
 interface MovieGridProps {
   movies: Movie[];
   title?: string;
-  showOverview?: boolean;
 }
 
-export function MovieGrid({
-  movies,
-  title,
-  showOverview = false,
-}: MovieGridProps) {
+export function MovieGrid({ movies, title }: MovieGridProps) {
   if (!movies.length) return null;
 
   return (
@@ -28,12 +23,7 @@ export function MovieGrid({
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6">
         {movies.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            showOverview={showOverview}
-            size="lg"
-          />
+          <MovieCard key={movie.id} movie={movie} size="lg" />
         ))}
       </div>
     </div>

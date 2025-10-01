@@ -12,16 +12,10 @@ import { Card } from "@/components/ui/card";
 interface MovieCardProps {
   movie: Movie;
   index?: number;
-  showOverview?: boolean;
   size?: "sm" | "md" | "lg";
 }
 
-export function MovieCard({
-  movie,
-  index = 0,
-  showOverview = false,
-  size = "lg",
-}: MovieCardProps) {
+export function MovieCard({ movie, index = 0, size = "lg" }: MovieCardProps) {
   const posterUrl = tmdbClient.getImageUrl(movie.poster_path, "w500");
   const year = movie.release_date ? formatYear(movie.release_date) : "TBD";
   const rating = formatRating(movie.vote_average);
@@ -64,17 +58,20 @@ export function MovieCard({
               {/* Hover Overlay */}
               <motion.div
                 variants={overlayVariants}
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end"
+                className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end"
               >
                 <div className="p-4 w-full">
+                  <h4 className="text-white font-bold text-sm mb-2 line-clamp-2">
+                    {movie.title}
+                  </h4>
                   <div className="flex items-center gap-2 text-white/90 text-xs mb-2">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-3 w-3" />
                       <span>{year}</span>
                     </div>
                   </div>
-                  {showOverview && movie.overview && (
-                    <p className="text-white/80 text-xs leading-relaxed">
+                  {movie.overview && (
+                    <p className="text-white/80 text-xs leading-relaxed line-clamp-3">
                       {truncateText(movie.overview, 120)}
                     </p>
                   )}
@@ -87,38 +84,6 @@ export function MovieCard({
                   <Star className="h-3 w-3 fill-yellow-400 text-yellow-400" />
                   <span className="font-medium">{rating}</span>
                 </div>
-              </div>
-            </div>
-
-            {/* Movie Info */}
-            <div className="flex-1 p-4 space-y-2 flex flex-col justify-between min-h-0">
-              <div className="space-y-2">
-                <h3
-                  className={`text-white line-clamp-2 leading-tight ${titleClasses[size]}`}
-                >
-                  {movie.title}
-                </h3>
-
-                {showOverview && movie.overview && size !== "sm" && (
-                  <p className="text-white/70 text-xs leading-relaxed line-clamp-2">
-                    {truncateText(movie.overview, size === "lg" ? 120 : 80)}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex items-center justify-between text-white/60 text-xs mt-auto">
-                <span className="flex items-center gap-1">
-                  <Calendar className="h-3 w-3" />
-                  {year}
-                </span>
-                {movie.vote_count > 0 && (
-                  <span className="flex items-center gap-1">
-                    <Star className="h-3 w-3" />
-                    {movie.vote_count > 1000
-                      ? `${Math.round(movie.vote_count / 1000)}k`
-                      : movie.vote_count.toString()}
-                  </span>
-                )}
               </div>
             </div>
           </div>

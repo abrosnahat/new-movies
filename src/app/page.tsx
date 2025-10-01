@@ -104,7 +104,6 @@ async function HomeContent() {
             <MovieList
               title="Trending This Week"
               movies={trendingMovies.results}
-              showOverview={true}
               size="lg"
             />
           </Suspense>

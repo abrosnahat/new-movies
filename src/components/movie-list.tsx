@@ -11,7 +11,6 @@ import Link from "next/link";
 interface MovieListProps {
   title: string;
   movies: Movie[];
-  showOverview?: boolean;
   size?: "sm" | "md" | "lg";
   href?: string;
 }
@@ -19,7 +18,6 @@ interface MovieListProps {
 export function MovieList({
   title,
   movies,
-  showOverview = false,
   size = "lg",
   href,
 }: MovieListProps) {
@@ -139,12 +137,7 @@ export function MovieList({
               key={movie.id}
               className="flex-shrink-0 aspect-[2/3] w-[320px]"
             >
-              <MovieCard
-                movie={movie}
-                index={index}
-                showOverview={showOverview}
-                size={size}
-              />
+              <MovieCard movie={movie} index={index} size={size} />
             </div>
           ))}
         </div>

@@ -149,7 +149,7 @@ export function UpcomingMoviesGrid({
         </div>
 
         <div className="transition-all duration-300">
-          <MovieGrid movies={movies} showOverview={false} />
+          <MovieGrid movies={movies} />
         </div>
 
         {/* Loading trigger element */}

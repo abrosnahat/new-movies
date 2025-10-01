@@ -6,13 +6,9 @@ import { MovieCard } from "./movie-card";
 
 interface AnimatedMovieGridProps {
   movies: Movie[];
-  showOverview?: boolean;
 }
 
-export function AnimatedMovieGrid({
-  movies,
-  showOverview = false,
-}: AnimatedMovieGridProps) {
+export function AnimatedMovieGrid({ movies }: AnimatedMovieGridProps) {
   const [displayedMovies, setDisplayedMovies] = useState<Movie[]>([]);
   const [lastMovieCount, setLastMovieCount] = useState(0);
 
@@ -61,7 +57,7 @@ export function AnimatedMovieGrid({
                 : "0ms",
             }}
           >
-            <MovieCard movie={movie} showOverview={showOverview} />
+            <MovieCard movie={movie} />
           </div>
         );
       })}
