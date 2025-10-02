@@ -11,10 +11,24 @@ const nextConfig: NextConfig = {
         port: "",
         pathname: "/t/p/**",
       },
+      {
+        protocol: "https",
+        hostname: "mc.yandex.ru",
+        port: "",
+        pathname: "/watch/**",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    // Добавляем качества изображений (включая 90 для существующих изображений)
+    qualities: [25, 50, 75, 90, 100],
+    // Кэширование изображений
+    minimumCacheTTL: 31536000, // 1 год
+    // Добавляем обработку ошибок
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
   // Performance optimizations
@@ -22,8 +36,22 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react", "framer-motion"],
   },
 
+  // Turbopack configuration
+  turbopack: {
+    rules: {
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
+      },
+    },
+  },
+
   // Compression
   compress: true,
+
+  // Дополнительные оптимизации производительности
+  poweredByHeader: false,
+  reactStrictMode: true,
 
   // Headers for SEO and security
   async headers() {

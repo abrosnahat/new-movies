@@ -162,11 +162,15 @@ async function MovieContent({ id }: { id: string }) {
       notFound();
     }
 
-    // Fetch movie details and related data in parallel
+    // Fetch essential data first (critical for rendering)
+    const [movieDetails, credits, videos] = await Promise.all([
+      tmdbClient.getMovieDetails(movieId),
+      tmdbClient.getMovieCredits(movieId),
+      tmdbClient.getMovieVideos(movieId),
+    ]);
+
+    // Fetch secondary data (can be loaded later or cached)
     const [
-      movieDetails,
-      credits,
-      videos,
       images,
       reviews,
       keywords,
@@ -176,17 +180,25 @@ async function MovieContent({ id }: { id: string }) {
       similarMovies,
       recommendations,
     ] = await Promise.all([
-      tmdbClient.getMovieDetails(movieId),
-      tmdbClient.getMovieCredits(movieId),
-      tmdbClient.getMovieVideos(movieId),
-      tmdbClient.getMovieImages(movieId),
-      tmdbClient.getMovieReviews(movieId),
-      tmdbClient.getMovieKeywords(movieId),
-      tmdbClient.getMovieExternalIds(movieId),
-      tmdbClient.getMovieReleaseDates(movieId),
-      tmdbClient.getMovieWatchProviders(movieId),
-      tmdbClient.getSimilarMovies(movieId),
-      tmdbClient.getMovieRecommendations(movieId),
+      tmdbClient
+        .getMovieImages(movieId)
+        .catch(() => ({ backdrops: [], posters: [] })),
+      tmdbClient
+        .getMovieReviews(movieId)
+        .catch(() => ({ results: [], total_results: 0 })),
+      tmdbClient.getMovieKeywords(movieId).catch(() => ({ keywords: [] })),
+      tmdbClient.getMovieExternalIds(movieId).catch(() => ({
+        imdb_id: null,
+        facebook_id: null,
+        twitter_id: null,
+        instagram_id: null,
+      })),
+      tmdbClient.getMovieReleaseDates(movieId).catch(() => ({ results: [] })),
+      tmdbClient.getMovieWatchProviders(movieId).catch(() => ({ results: {} })),
+      tmdbClient.getSimilarMovies(movieId).catch(() => ({ results: [] })),
+      tmdbClient
+        .getMovieRecommendations(movieId)
+        .catch(() => ({ results: [] })),
     ]);
 
     const backdropUrl = tmdbClient.getBackdropUrl(
@@ -249,35 +261,29 @@ async function MovieContent({ id }: { id: string }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
           </div>
 
-          {/* Back Button */}
-          <div className="absolute top-24 left-6 lg:left-8 z-20">
-            <Link href="/">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="glass rounded-full"
-              >
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-            </Link>
-          </div>
-
-          {/* Breadcrumbs */}
-          <div className="absolute top-40 left-6 lg:left-8 z-20">
-            <Breadcrumbs
-              items={[
-                { label: "Movies", href: "/" },
-                { label: movieDetails.title },
-              ]}
-            />
-          </div>
-
           {/* Content */}
           <div className="relative z-10 flex h-full items-center">
             <div className="container mx-auto px-6 lg:px-8">
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Movie Info */}
                 <div className="lg:col-span-8 space-y-6">
+                  {/* Back Button */}
+                  <Link href="/">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="glass rounded-full"
+                    >
+                      <ArrowLeft className="h-5 w-5" />
+                    </Button>
+                  </Link>
+                  {/* Breadcrumbs */}
+                  <Breadcrumbs
+                    items={[
+                      { label: "Movies", href: "/" },
+                      { label: movieDetails.title },
+                    ]}
+                  />
                   {/* Title */}
                   <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                     <span className="text-gradient">{movieDetails.title}</span>
