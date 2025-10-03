@@ -9,4 +9,5 @@ export const MOVIES__DATA: Record<string, string> = {
   "The Dark Knight": "5hwug4t43367",
   "Play Dirty": "59jgxcggwk48",
   Sinners: "gztj9cjqj2x5",
+  Mantis: "2v0ibmdr9yu5",
 };
