@@ -10,4 +10,5 @@ export const MOVIES__DATA: Record<string, string> = {
   "Play Dirty": "59jgxcggwk48",
   Sinners: "gztj9cjqj2x5",
   Mantis: "2v0ibmdr9yu5",
+  "The Conjuring: Last Rites": "hc7r3c3p1w7i"
 };
