@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { tmdbClient } from "@/lib/tmdb";
+import { getCachedUpcomingMovies } from "@/lib/cached-tmdb";
 import { UpcomingMoviesGrid } from "@/components/upcoming-movies-grid";
 
 export const metadata: Metadata = {
@@ -47,7 +47,7 @@ function MovieGridSkeleton() {
 
 async function UpcomingContent() {
   try {
-    const upcomingMovies = await tmdbClient.getUpcomingMovies();
+    const upcomingMovies = await getCachedUpcomingMovies();
 
     return (
       <UpcomingMoviesGrid

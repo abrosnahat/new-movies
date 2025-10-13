@@ -1,6 +1,12 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { tmdbClient } from "@/lib/tmdb";
+import {
+  getCachedPopularMovies,
+  getCachedTrendingMovies,
+  getCachedTopRatedMovies,
+  getCachedUpcomingMovies,
+  preloadCriticalData,
+} from "@/lib/cached-tmdb";
 import { HeroSection } from "@/components/hero-section";
 import { MovieList } from "@/components/movie-list";
 
@@ -79,13 +85,16 @@ function HeroSkeleton() {
 // Server component to fetch data
 async function HomeContent() {
   try {
-    // Fetch data in parallel
+    // Предзагружаем критичные данные для прогрева кеша
+    await preloadCriticalData();
+
+    // Fetch data in parallel with caching
     const [trendingMovies, popularMovies, topRatedMovies, upcomingMovies] =
       await Promise.all([
-        tmdbClient.getTrendingMovies("week"),
-        tmdbClient.getPopularMovies(),
-        tmdbClient.getTopRatedMovies(),
-        tmdbClient.getUpcomingMovies(),
+        getCachedTrendingMovies("week"),
+        getCachedPopularMovies(),
+        getCachedTopRatedMovies(),
+        getCachedUpcomingMovies(),
       ]);
 
     // Use trending movies for hero section (first 5)

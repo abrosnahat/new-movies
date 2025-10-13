@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { tmdbClient } from "@/lib/tmdb";
+import { getCachedPopularMovies } from "@/lib/cached-tmdb";
 import { PopularMoviesGrid } from "@/components/popular-movies-grid";
 
 export const metadata: Metadata = {
@@ -47,7 +47,7 @@ function MovieGridSkeleton() {
 
 async function PopularContent() {
   try {
-    const popularMovies = await tmdbClient.getPopularMovies();
+    const popularMovies = await getCachedPopularMovies();
 
     return (
       <PopularMoviesGrid

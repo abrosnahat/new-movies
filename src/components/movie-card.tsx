@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Star, Calendar } from "lucide-react";
-import { motion } from "framer-motion";
 import { Movie } from "@/types/tmdb";
 import { tmdbClient } from "@/lib/tmdb";
 import { formatRating, formatYear, truncateText } from "@/lib/utils";
