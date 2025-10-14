@@ -30,6 +30,7 @@ export function RelatedMovies({
             <Link
               key={movie.id}
               href={`/movie/${movie.id}`}
+              prefetch={false}
               className="group"
               title={`Watch ${movie.title} Online Free`}
             >

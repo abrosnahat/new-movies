@@ -119,7 +119,7 @@ export function HeroSection({ movies }: HeroSectionProps) {
 
                   {/* Action Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
-                    <Link href={`/movie/${currentMovie.id}`}>
+                    <Link href={`/movie/${currentMovie.id}`} prefetch={false}>
                       <Button size="lg" variant="primary">
                         <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
                         Watch

@@ -29,7 +29,7 @@ export function MovieCard({ movie, index = 0, size = "lg" }: MovieCardProps) {
 
   return (
     <div className="group">
-      <Link href={`/movie/${movie.id}`}>
+      <Link href={`/movie/${movie.id}`} prefetch={false}>
         <Card
           className={`${sizeClasses[size]} overflow-hidden p-0 flex flex-col hover:scale-105 transition-transform duration-300 bg-white/10 border border-white/20`}
         >

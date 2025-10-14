@@ -20,6 +20,13 @@ import {
 } from "lucide-react";
 import { tmdbClient } from "@/lib/tmdb";
 import {
+  getCachedMovieDetails,
+  getCachedMovieCredits,
+  getCachedMovieVideos,
+  getCachedSimilarMovies,
+  getCachedMovieRecommendations,
+} from "@/lib/cached-tmdb";
+import {
   formatRating,
   formatYear,
   formatRuntime,
@@ -48,7 +55,7 @@ export async function generateMetadata({
   try {
     const { id } = await params;
     const movieId = parseInt(id);
-    const movieDetails = await tmdbClient.getMovieDetails(movieId);
+    const movieDetails = await getCachedMovieDetails(movieId);
 
     const watchUrl = getMovieWatchUrl(movieDetails.title);
     const posterUrl = tmdbClient.getImageUrl(movieDetails.poster_path, "w500");
@@ -162,11 +169,11 @@ async function MovieContent({ id }: { id: string }) {
       notFound();
     }
 
-    // Fetch essential data first (critical for rendering)
+    // Fetch essential data first (critical for rendering) - with caching
     const [movieDetails, credits, videos] = await Promise.all([
-      tmdbClient.getMovieDetails(movieId),
-      tmdbClient.getMovieCredits(movieId),
-      tmdbClient.getMovieVideos(movieId),
+      getCachedMovieDetails(movieId),
+      getCachedMovieCredits(movieId),
+      getCachedMovieVideos(movieId),
     ]);
 
     // Fetch secondary data (can be loaded later or cached)
@@ -195,10 +202,8 @@ async function MovieContent({ id }: { id: string }) {
       })),
       tmdbClient.getMovieReleaseDates(movieId).catch(() => ({ results: [] })),
       tmdbClient.getMovieWatchProviders(movieId).catch(() => ({ results: {} })),
-      tmdbClient.getSimilarMovies(movieId).catch(() => ({ results: [] })),
-      tmdbClient
-        .getMovieRecommendations(movieId)
-        .catch(() => ({ results: [] })),
+      getCachedSimilarMovies(movieId).catch(() => ({ results: [] })),
+      getCachedMovieRecommendations(movieId).catch(() => ({ results: [] })),
     ]);
 
     const backdropUrl = tmdbClient.getBackdropUrl(
