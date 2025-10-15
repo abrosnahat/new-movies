@@ -36,8 +36,6 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react", "framer-motion"],
     // Отключаем автоматический prefetch для всех ссылок
     linkNoTouchStart: true,
-    // Оптимизация сборки
-    optimizeCss: true,
   },
 
   // Turbopack configuration
