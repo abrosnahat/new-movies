@@ -1,4 +1,9 @@
 User-Agent: *
+Allow: /
+Allow: /movie/*
+Disallow: /popular
+Disallow: /top-rated
+Disallow: /upcoming
 Disallow: *utm
 Disallow: *?
 Disallow: /admin/
@@ -11,6 +16,11 @@ Disallow: *&page=
 
 
 User-agent: Yandex
+Allow: /
+Allow: /movie/*
+Disallow: /popular
+Disallow: /top-rated
+Disallow: /upcoming
 Disallow: *?
 Disallow: *utm
 Disallow: /admin/
@@ -21,6 +31,11 @@ Clean-param: q&sort&page
 
 
 User-agent: Googlebot
+Allow: /
+Allow: /movie/*
+Disallow: /popular
+Disallow: /top-rated
+Disallow: /upcoming
 Disallow: *?
 Disallow: *utm
 Disallow: /admin/

@@ -1,10 +1,13 @@
 import { MetadataRoute } from "next";
-import { tmdbClient } from "@/lib/tmdb";
+import {
+  getCachedPopularMovies,
+  getCachedTrendingMovies,
+} from "@/lib/cached-tmdb";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://new-movies.online";
 
-  // Static pages
+  // Only homepage
   const staticPages = [
     {
       url: baseUrl,
@@ -12,41 +15,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "daily" as const,
       priority: 1,
     },
-    {
-      url: `${baseUrl}/popular`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/top-rated`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/upcoming`,
-      lastModified: new Date(),
-      changeFrequency: "daily" as const,
-      priority: 0.8,
-    },
   ];
 
   try {
-    // Get popular movies for sitemap
-    const [popularMovies, topRatedMovies] = await Promise.all([
-      tmdbClient.getPopularMovies(),
-      tmdbClient.getTopRatedMovies(),
+    // Get only movies from homepage (trending + popular)
+    const [trendingMovies, popularMovies] = await Promise.all([
+      getCachedTrendingMovies("week"),
+      getCachedPopularMovies(),
     ]);
 
-    // Combine and deduplicate movies
-    const allMovies = [...popularMovies.results, ...topRatedMovies.results];
-    const uniqueMovies = allMovies.filter(
+    // Combine movies from homepage only
+    const homepageMovies = [
+      ...trendingMovies.results,
+      ...popularMovies.results,
+    ];
+
+    // Deduplicate
+    const uniqueMovies = homepageMovies.filter(
       (movie, index, self) => index === self.findIndex((m) => m.id === movie.id)
     );
 
-    // Create movie pages
-    const moviePages = uniqueMovies.slice(0, 1000).map((movie) => ({
+    // Create movie pages (only from homepage)
+    const moviePages = uniqueMovies.map((movie) => ({
       url: `${baseUrl}/movie/${movie.id}`,
       lastModified: new Date(),
       changeFrequency: "weekly" as const,

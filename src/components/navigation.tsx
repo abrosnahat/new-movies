@@ -4,7 +4,7 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Film, Star, TrendingUp, Calendar, Menu, X } from "lucide-react";
+import { Film, Menu, X } from "lucide-react";
 import { SearchInput } from "@/components/ui/search-input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -15,12 +15,7 @@ interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
 }
 
-const navItems: NavItem[] = [
-  { href: "/", label: "Home", icon: Film },
-  { href: "/popular", label: "Popular", icon: TrendingUp },
-  { href: "/top-rated", label: "Top Rated", icon: Star },
-  { href: "/upcoming", label: "Upcoming", icon: Calendar },
-];
+const navItems: NavItem[] = [{ href: "/", label: "Home", icon: Film }];
 
 interface NavigationProps {
   onSearch?: (query: string) => void;

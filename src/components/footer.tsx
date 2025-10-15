@@ -29,37 +29,6 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Movie Categories */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Browse Movies</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/popular"
-                  className="text-white/70 hover:text-white transition-colors text-sm"
-                >
-                  Popular Movies
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/top-rated"
-                  className="text-white/70 hover:text-white transition-colors text-sm"
-                >
-                  Top Rated Movies
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/upcoming"
-                  className="text-white/70 hover:text-white transition-colors text-sm"
-                >
-                  Upcoming Movies
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* Genres */}
           <div>
             <h4 className="text-white font-semibold mb-4">Popular Genres</h4>
