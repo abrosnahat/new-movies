@@ -49,6 +49,10 @@ interface MoviePageProps {
   };
 }
 
+// ISR - revalidate каждый час, генерация по требованию
+export const revalidate = 3600;
+export const dynamicParams = true; // Генерировать страницы по запросу
+
 export async function generateMetadata({
   params,
 }: MoviePageProps): Promise<Metadata> {
